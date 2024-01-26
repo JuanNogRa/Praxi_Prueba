@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Micro-Servicio Web</title>
+    </h:head>
+        <h:body>
+            <h:form enctype="multipart/form-data" style="width:500px">
+                <p:fileUpload fileUploadListener="#{fileBean.fileUploadListener}" mode="advanced" allowTypes="/(\.|\/)(jpe?g|png)$/"
+                ></p:fileUpload>
+             
+                <h:panelGroup id="result2">
+                    <h:outputText value="#{fileBean.json_text}" rendered="#{fileBean.json_text}"/>
+                </h:panelGroup>
+                
+                <h:panelGroup>
+                    <h:outputText id="table1" />
+                    <ui:repeat value="#{fileBean.json_text}" var="page">
+                      <h:commandLink value="#{page}">
+                        <f:ajax execute="@form" render=":form1:table1" listener="#{fileBean.json_text}" />
+                      </h:commandLink>
+                    </ui:repeat>
+                  </h:panelGroup> 
+                </h:form>
+	</h:body>
+</html>
+
